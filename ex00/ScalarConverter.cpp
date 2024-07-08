@@ -6,7 +6,7 @@
 /*   By: rmehadje <rmehadje@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 15:57:06 by rmehadje          #+#    #+#             */
-/*   Updated: 2024/07/08 10:12:48 by rmehadje         ###   ########.fr       */
+/*   Updated: 2024/07/08 10:18:11 by rmehadje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,4 +135,8 @@ void	ScalarConverter::toChar(std::string str){
 	c = static_cast<char>(j);
 	std::cout << "Char: " << c << std::endl;
 	return ; 
+}
+
+void	ScalarConverter::convert(std::string str){
+	toChar(str);
 }
