@@ -1,6 +1,6 @@
 NAME = ex00
 
-SRC = main.cpp
+SRC = main.cpp ScalarConverter.cpp
 
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
