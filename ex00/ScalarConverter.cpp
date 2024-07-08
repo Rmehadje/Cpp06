@@ -6,17 +6,14 @@
 /*   By: rmehadje <rmehadje@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 15:57:06 by rmehadje          #+#    #+#             */
-/*   Updated: 2024/07/08 10:18:11 by rmehadje         ###   ########.fr       */
+/*   Updated: 2024/07/08 10:56:44 by rmehadje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
 
 ScalarConverter::ScalarConverter(){
-	this->c = '\0';
-	this->i = 0;
-	this->f = 0.0f;
-	this->d = 0.0;
+
 }
 
 ScalarConverter::ScalarConverter(const ScalarConverter &og){
@@ -29,6 +26,10 @@ ScalarConverter &ScalarConverter::operator=(const ScalarConverter &cp){
 	return *this;
 }
 
+ScalarConverter&	ScalarConverter::getInstance(){
+	static ScalarConverter instance;
+	return instance;	
+}
 
 void		ScalarConverter::Error(std::string error){
 	std::cerr << "Wrong input: " << error << std::endl;
@@ -137,6 +138,32 @@ void	ScalarConverter::toChar(std::string str){
 	return ; 
 }
 
-void	ScalarConverter::convert(std::string str){
+
+
+void	ScalarConverter::converter(std::string str){
 	toChar(str);
+	toInt(str);
+}
+void	ScalarConverter::toInt(std::string str){
+	int i;
+	if (str.length() == 1 && !std::isdigit(str[0])){
+		i = static_cast <int>(str[0]);
+		std::cout << "Int: " << i << std::endl;
+		return ;
+	}
+	if (str.find(".") != std::string::npos){
+		double d = strtod(str.c_str(), NULL);
+		i = static_cast<int>(d);
+		std::cout << "Int: " << i << std::endl;
+		return ;
+	}
+	if (str.find("f") != std::string::npos){
+		double d = strtod(str.c_str(), NULL);
+		i = static_cast<int>(d);
+		std::cout << "Int: " << i << std::endl;
+		return ;
+	}
+	i = std::atoi(str.c_str());
+	std::cout << "Int: " << i << std::endl;
+	return ; 
 }

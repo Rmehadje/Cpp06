@@ -6,7 +6,7 @@
 /*   By: rmehadje <rmehadje@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 15:25:33 by rmehadje          #+#    #+#             */
-/*   Updated: 2024/07/08 10:18:03 by rmehadje         ###   ########.fr       */
+/*   Updated: 2024/07/08 10:47:11 by rmehadje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,18 @@
 
 class ScalarConverter{
 	private:
-		char			c;
-		int			i;
-		float			f;
-		double		d;
-	public:
 		ScalarConverter();
 		ScalarConverter(const ScalarConverter &og);
-		~ScalarConverter();
 		ScalarConverter &operator=(const ScalarConverter &cp);
+	public:
+		~ScalarConverter();
+		static ScalarConverter&		getInstance();
 		void		HandleInf();
 		void		HandleNInf();
 		void		HandleNan();
 		void		Error(std::string error);
 		int		Checker(std::string argv);
-		void		convert(std::string str);
+		void		converter(std::string str);
 		void		toChar(std::string str);
+		void		toInt(std::string str);
 };

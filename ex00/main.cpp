@@ -6,7 +6,7 @@
 /*   By: rmehadje <rmehadje@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 15:25:19 by rmehadje          #+#    #+#             */
-/*   Updated: 2024/07/08 10:20:55 by rmehadje         ###   ########.fr       */
+/*   Updated: 2024/07/08 10:47:32 by rmehadje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 int main(int argc, char* argv[])
 {
   if (2 == argc) {
-    ScalarConverter convert;
+    ScalarConverter& convert = ScalarConverter::getInstance();
     try {
-      convert.toChar(argv[1]);
+      convert.converter(argv[1]);
     }
     catch (const std::invalid_argument& e) {
       std::cerr << "Program recieved " << e.what() << std::endl;
