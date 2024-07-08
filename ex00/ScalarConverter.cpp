@@ -6,7 +6,7 @@
 /*   By: rmehadje <rmehadje@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 15:57:06 by rmehadje          #+#    #+#             */
-/*   Updated: 2024/07/05 18:01:54 by rmehadje         ###   ########.fr       */
+/*   Updated: 2024/07/08 10:10:00 by rmehadje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,4 +97,42 @@ int		ScalarConverter::Checker(std::string argv){
 		}
 	}
 	return 1;
+}
+
+
+void	ScalarConverter::toChar(std::string str){
+	char c;
+	if (str.length() == 1 && !std::isdigit(str[0])){
+		c = static_cast <char>((int)str[0]);
+		std::cout << "Char: " << c << std::endl;
+		return ;
+	}
+	if (str.find(".") != std::string::npos){
+		double d = strtod(str.c_str(), NULL);
+		if (d < 32 || d > 127){
+			std::cout << "Char: Non Displayable" << std::endl;
+			return ;
+		}
+		c = static_cast<char>(d);
+		std::cout << "Char: " << c << std::endl;
+		return ;
+	}
+	if (str.find("f") != std::string::npos){
+		double d = strtod(str.c_str(), NULL);
+		if (d < 32 || d > 127){
+			std::cout << "Char: Non Displayable" << std::endl;
+			return ;
+		}
+		c = static_cast<char>(d);
+		std::cout << "Char: " << c << std::endl;
+		return ;
+	}
+	int j = std::atoi(str.c_str());
+	if (j < 32 || j > 127){
+		std::cout << "Char: Non Displayable" << std::endl;
+		return ;
+	}
+	c = static_cast<char>(j);
+	std::cout << "Char: " << c << std::endl;
+	return ; 
 }

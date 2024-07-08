@@ -6,7 +6,7 @@
 /*   By: rmehadje <rmehadje@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 15:25:33 by rmehadje          #+#    #+#             */
-/*   Updated: 2024/07/05 17:41:19 by rmehadje         ###   ########.fr       */
+/*   Updated: 2024/07/08 09:59:41 by rmehadje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,6 @@ class ScalarConverter{
 		void		HandleNan();
 		void		Error(std::string error);
 		int		Checker(std::string argv);
+		void		converter(std::string str);
+		void		toChar(std::string str);
 };
