@@ -6,7 +6,7 @@
 /*   By: rmehadje <rmehadje@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 15:25:33 by rmehadje          #+#    #+#             */
-/*   Updated: 2024/07/08 10:47:11 by rmehadje         ###   ########.fr       */
+/*   Updated: 2024/07/08 12:01:15 by rmehadje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <string>
 #include <cstdlib>
 #include <iostream>
+#include <iomanip>
 
 class ScalarConverter{
 	private:
@@ -28,8 +29,10 @@ class ScalarConverter{
 		void		HandleNInf();
 		void		HandleNan();
 		void		Error(std::string error);
-		int		Checker(std::string argv);
+		int		Checker(std::string str);
 		void		converter(std::string str);
 		void		toChar(std::string str);
 		void		toInt(std::string str);
+		void		toFloat(std::string str);
+		void		toDouble(std::string str);
 };

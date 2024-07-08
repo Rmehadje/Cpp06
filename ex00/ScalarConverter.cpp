@@ -6,14 +6,14 @@
 /*   By: rmehadje <rmehadje@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 15:57:06 by rmehadje          #+#    #+#             */
-/*   Updated: 2024/07/08 10:56:44 by rmehadje         ###   ########.fr       */
+/*   Updated: 2024/07/08 12:05:40 by rmehadje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
 
 ScalarConverter::ScalarConverter(){
-
+	std::cout << "ScalarConverter constructor called" << std::endl;
 }
 
 ScalarConverter::ScalarConverter(const ScalarConverter &og){
@@ -54,47 +54,47 @@ void		ScalarConverter::HandleNan(){
 	std::cout << "Char: nan" << std::endl;	
 }
 
-int		ScalarConverter::Checker(std::string argv){
+int		ScalarConverter::Checker(std::string str){
 	int	flag = 0;
 	int	fflag = 0;
-	if (argv.empty())
+	if (str.empty())
 		return (Error("no input found"), 0);
-	if (argv == "inf" || argv == "+inf")
+	if (str == "inf" || str == "+inf")
 		return (HandleInf(), 0);
-	if (argv == "-inf")
+	if (str == "-inf")
 		return (HandleNInf(), 0);
-	if (argv == "nan" || argv == "nanf")
+	if (str == "nan" || str == "nanf")
 		return (HandleNan(), 0);
-	if (argv.length() == 1)
+	if (str.length() == 1)
 	{
-		if (!std::isdigit(argv[0]))
+		if (!std::isdigit(str[0]))
 			return 1;
 	}
-	for (int i = 0; i < argv.length(); i++){
-		if (argv[i] == '-'){
+	for (int i = 0; i < str.length(); i++){
+		if (str[i] == '-'){
 			if (i != 0)
-				return (Error(argv), 0);
+				return (Error(str), 0);
 			i++;
 		}
-		if (!std::isdigit(argv[i])){
-			if (argv[i] == '.' && argv[i] != 'f')
-				return (Error(argv), 0);
+		if (!std::isdigit(str[i])){
+			if (str[i] != '.' && str[i] != 'f')
+				return (Error(str), 0);
 			else{
-				if (argv[i] == '.'){
-					if (i == (argv.length() - 1) || i == 0)
-						return (Error(argv), 0);
+				if (str[i] == '.'){
+					if (i == (str.length() - 1) || i == 0)
+						return (Error(str), 0);
 					else
 						flag++;
 				}
-				if (argv[i] == 'f'){
-					if (i == argv.length() - 1 && argv[i - 1] == '.')
+				if (str[i] == 'f'){
+					if (i == str.length() - 1 && str[i - 1] != '.')
 						fflag++;
 					else
-						return (Error(argv), 0);
+						return (Error(str), 0);
 				}
 			}
 			if (flag > 1 || fflag > 1)
-				return (Error(argv), 0);		
+				return (Error(str), 0);		
 		}
 	}
 	return 1;
@@ -141,8 +141,12 @@ void	ScalarConverter::toChar(std::string str){
 
 
 void	ScalarConverter::converter(std::string str){
+	if(!Checker(str))
+		return ;
 	toChar(str);
 	toInt(str);
+	toFloat(str);
+	toDouble(str);
 }
 void	ScalarConverter::toInt(std::string str){
 	int i;
@@ -165,5 +169,51 @@ void	ScalarConverter::toInt(std::string str){
 	}
 	i = std::atoi(str.c_str());
 	std::cout << "Int: " << i << std::endl;
+	return ; 
+}
+
+void	ScalarConverter::toFloat(std::string str){
+	float f;
+	if (str.length() == 1 && !std::isdigit(str[0])){
+		f = static_cast <float>(str[0]);
+		std::cout << std::fixed << std::setprecision(2) << "Float: " << f << "f" << std::endl;
+		return ;
+	}
+	if (str.find(".") != std::string::npos){
+		double d = strtod(str.c_str(), NULL);
+		f = static_cast<float>(d);
+		std::cout << std::fixed << std::setprecision(2) << "Float: " << f << "f" << std::endl;
+		return ;
+	}
+	if (str.find("f") != std::string::npos){
+		double d = strtod(str.c_str(), NULL);
+		f = static_cast<float>(d);
+		std::cout << std::fixed << std::setprecision(2) << "Float: " << f << "f" << std::endl;
+		return ;
+	}
+	f = std::atoi(str.c_str());
+	std::cout << std::fixed << std::setprecision(2) << "Float: " << f << "f" << std::endl;
+	return ; 
+}
+
+void	ScalarConverter::toDouble(std::string str){
+	double d;
+	if (str.length() == 1 && !std::isdigit(str[0])){
+		d = static_cast <double>(str[0]);
+		std::cout << std::fixed << std::setprecision(2) << "Double: " << d << std::endl;
+		return ;
+	}
+	if (str.find(".") != std::string::npos){
+		d = strtod(str.c_str(), NULL);
+		std::cout << std::fixed << std::setprecision(2) << "Double: " << d << std::endl;
+		return ;
+	}
+	if (str.find("f") != std::string::npos){
+		d = strtod(str.c_str(), NULL);
+		std::cout << std::fixed << std::setprecision(2) << "Double: " << d << std::endl;
+		return ;
+	}
+	d = std::atoi(str.c_str());
+	std::cout << std::fixed << std::setprecision(2) << "Double: " << d << std::endl;
 	return ; 
 }
