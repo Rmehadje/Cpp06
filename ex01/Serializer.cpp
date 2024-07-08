@@ -6,11 +6,11 @@
 /*   By: rmehadje <rmehadje@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 13:13:28 by rmehadje          #+#    #+#             */
-/*   Updated: 2024/07/08 13:16:57 by rmehadje         ###   ########.fr       */
+/*   Updated: 2024/07/08 13:44:20 by rmehadje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Seriealizer.hpp"
+#include "Serializer.hpp"
 
 Serializer::Serializer() {}
 
@@ -24,10 +24,15 @@ Serializer &Serializer::operator=(const Serializer &og){
 
 Serializer::~Serializer(){}
 
-uintptr_t Serializer::seralize(Data *ptr){
+uintptr_t Serializer::serialize(Data *ptr){
 	return reinterpret_cast<uintptr_t>(ptr);
 }
 
-Data Serializer::deseralize(Uintptr_t raw){
+Data *Serializer::deseralize(uintptr_t raw){
 	return reinterpret_cast<Data *>(raw);
+}
+
+Serializer&	Serializer::getInstance(){
+	static Serializer instance;
+	return instance;	
 }
